@@ -324,6 +324,18 @@ var SoundDeviceChooserBase = class SoundDeviceChooserBase{
             } else {
                 this.menuItem.icon.gicon = null;
             }
+            
+            
+            try {
+                if(obj.text === "Auriculares analógicos (Audio Interno)") {
+                    let [result, out, err, exit_code] = GLib.spawn_command_line_sync('alsactl --file /home/jota0222/.config/asound.state restore');
+                    if(exit_code !== 0) {
+                        global.log("Error: " + err);
+                    }
+                } 
+            } catch(e){
+                global.log("Error: " + e);
+            }
         }
     }
 
